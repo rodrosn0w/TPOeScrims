@@ -1,20 +1,23 @@
 package main.domain.entities;
 
 import main.domain.strategy.MatchmakingStrategy;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class Scrim {
     private UUID id = UUID.randomUUID();
     private String juego;
-    private String formato;                 // 5v5 / 1v1
+    private String formato;
     private String region;
     private String rangoMin;
     private String rangoMax;
     private int latenciaMax;
     private LocalDateTime fechaHora;
     private List<Usuario> jugadores = new ArrayList<>();
+
+    // --- LÓGICA AGREGADA ---
+    // Atributo clave para el Patrón State.
+    private int cupos = 10; // Valor por defecto para 5v5
 
     private MatchmakingStrategy estrategiaEmparejamiento;
 
@@ -23,14 +26,33 @@ public class Scrim {
     public String getRegion(){ return region; }
     public List<Usuario> getJugadores(){ return jugadores; }
 
+    // --- LÓGICA AGREGADA (Getters) ---
+    public int getCupos() { return cupos; }
+    public int getLatenciaMax() { return latenciaMax; }
+    public LocalDateTime getFechaHora() { return fechaHora; }
+    public int getCantidadJugadores() { return jugadores.size(); } // Necesario para StateBuscando
+
     public MatchmakingStrategy getEstrategiaEmparejamiento(){ return estrategiaEmparejamiento; }
     public void setEstrategiaEmparejamiento(MatchmakingStrategy e){ this.estrategiaEmparejamiento = e; }
 
-    // setters encadenables para builder si se desea
     public void setJuego(String j){ this.juego = j; }
-    public void setFormato(String f){ this.formato = f; }
+    public void setFormato(String f){
+        this.formato = f;
+        // --- LÓGICA AGREGADA ---
+        // Regla de negocio: ajustar cupos según formato
+        if ("5v5".equals(f)) this.cupos = 10;
+        if ("1v1".equals(f)) this.cupos = 2;
+    }
     public void setRegion(String r){ this.region = r; }
     public void setRangos(String min, String max){ this.rangoMin = min; this.rangoMax = max; }
     public void setLatenciaMax(int l){ this.latenciaMax = l; }
     public void setFechaHora(LocalDateTime t){ this.fechaHora = t; }
+
+    // --- LÓGICA AGREGADA ---
+    // Método para que el Contexto pueda agregar jugadores
+    public void agregarJugador(Usuario u) {
+        if (jugadores.size() < cupos) {
+            jugadores.add(u);
+        }
+    }
 }
