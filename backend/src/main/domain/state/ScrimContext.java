@@ -54,6 +54,10 @@ public class ScrimContext {
         // Al aceptar una postulación, se crea un slot de confirmación pendiente
         this.confirmaciones.add(new Confirmacion(p.getUsuario(), this.scrim));
     }
+
+    public String getNombreEstadoActual() {
+        return this.state.nombre();
+    }
     // --- FIN LÓGICA AGREGADA ---
 
 
