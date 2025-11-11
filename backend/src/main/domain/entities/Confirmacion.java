@@ -3,8 +3,7 @@ package main.domain.entities;
 import java.util.UUID;
 
 public class Confirmacion {
-    // --- LÓGICA AGREGADA ---
-    // Atributos del modelo de dominio
+
     private final UUID id = UUID.randomUUID();
     private final Usuario usuario;
     private final Scrim scrim;
@@ -31,5 +30,5 @@ public class Confirmacion {
     public UUID getUsuarioId() {
         return usuario.getId();
     }
-    // --- FIN LÓGICA AGREGADA ---
+
 }

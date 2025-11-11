@@ -14,11 +14,11 @@ public class App {
         var repo = new InMemoryScrimRepo();
         var service = new ScrimService(repo, bus);
 
-        // --- ¡CAMBIO AQUÍ! ---
-        // 1. Decidimos qué fábrica usar (la de simulación para la demo)
+
+
         NotifierFactory factory = new DevNotifierFactory();
 
-        // 2. Se la "inyectamos" al controlador
+
         new ConsoleController(service, bus, factory).demo();
     }
 }

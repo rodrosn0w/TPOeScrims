@@ -24,11 +24,11 @@ public class ScrimService {
         Scrim s = new ScrimBuilder().juego(juego).formato("5v5").region(region)
                 .fecha(LocalDateTime.now().plusHours(2)).build();
 
-        // --- LÓGICA AGREGADA ---
+
         // Asignamos una estrategia por defecto al Scrim
         s.setEstrategiaEmparejamiento(new ByMMRStrategy());
         System.out.println("[SERVICE]: Scrim creado con estrategia por defecto: ByMMRStrategy");
-        // --- FIN LÓGICA AGREGADA ---
+
 
         repo.save(s);
         return new ScrimContext(s, bus);

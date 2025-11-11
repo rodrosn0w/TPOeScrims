@@ -3,8 +3,7 @@ package main.domain.entities;
 import java.util.UUID;
 
 public class Postulacion {
-    // --- LÓGICA AGREGADA ---
-    // Atributos del modelo de dominio
+
     private final UUID id = UUID.randomUUID();
     private final Usuario usuario;
     private final Scrim scrim;
@@ -18,10 +17,10 @@ public class Postulacion {
         this.estado = "Pendiente";
     }
 
-    // Getters
+
     public Usuario getUsuario() { return usuario; }
     public Scrim getScrim() { return scrim; }
     public String getEstado() { return estado; }
     public void setEstado(String estado) { this.estado = estado; }
-    // --- FIN LÓGICA AGREGADA ---
+
 }

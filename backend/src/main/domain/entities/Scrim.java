@@ -15,7 +15,7 @@ public class Scrim {
     private LocalDateTime fechaHora;
     private List<Usuario> jugadores = new ArrayList<>();
 
-    // --- LÓGICA AGREGADA ---
+
     // Atributo clave para el Patrón State.
     private int cupos = 10; // Valor por defecto para 5v5
 
@@ -26,7 +26,7 @@ public class Scrim {
     public String getRegion(){ return region; }
     public List<Usuario> getJugadores(){ return jugadores; }
 
-    // --- LÓGICA AGREGADA (Getters) ---
+
     public int getCupos() { return cupos; }
     public int getLatenciaMax() { return latenciaMax; }
     public LocalDateTime getFechaHora() { return fechaHora; }
@@ -38,8 +38,7 @@ public class Scrim {
     public void setJuego(String j){ this.juego = j; }
     public void setFormato(String f){
         this.formato = f;
-        // --- LÓGICA AGREGADA ---
-        // Regla de negocio: ajustar cupos según formato
+
         if ("5v5".equals(f)) this.cupos = 10;
         if ("1v1".equals(f)) this.cupos = 2;
     }
@@ -48,8 +47,7 @@ public class Scrim {
     public void setLatenciaMax(int l){ this.latenciaMax = l; }
     public void setFechaHora(LocalDateTime t){ this.fechaHora = t; }
 
-    // --- LÓGICA AGREGADA ---
-    // Método para que el Contexto pueda agregar jugadores
+
     public void agregarJugador(Usuario u) {
         if (jugadores.size() < cupos) {
             jugadores.add(u);

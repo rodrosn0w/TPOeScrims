@@ -21,7 +21,7 @@ public class StateEnJuego implements ScrimState { // Asegúrate que implemente S
 
     @Override
     public void finalizar(ScrimContext ctx) {
-        // --- LÓGICA AGREGADA ---
+
         // CU8: Finalizar y cargar estadísticas
         System.out.println("[STATE: En Juego] El scrim ha finalizado. Pasando a 'Finalizado'.");
         ctx.setState(new StateFinalizado());

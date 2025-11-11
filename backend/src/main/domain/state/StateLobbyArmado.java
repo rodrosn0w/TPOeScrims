@@ -12,7 +12,7 @@ public class StateLobbyArmado implements ScrimState { // Asegúrate que implemen
 
     @Override
     public void confirmar(ScrimContext ctx, Usuario u) {
-        // --- LÓGICA AGREGADA ---
+
         // CU6: Confirmar participación
         Confirmacion c = ctx.getConfirmacion(u);
 

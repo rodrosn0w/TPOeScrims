@@ -16,7 +16,7 @@ public class ScrimContext {
     private ScrimState state;
     private final DomainEventBus bus;
 
-    // --- LÓGICA AGREGADA ---
+
     // El contexto debe manejar las listas para que los estados tomen decisiones
     private final List<Postulacion> postulaciones = new ArrayList<>();
     private final List<Confirmacion> confirmaciones = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ScrimContext {
     }
     public Scrim getScrim(){ return scrim; }
 
-    // --- LÓGICA AGREGADA ---
+
     // Métodos para que los estados gestionen las listas
     public List<Postulacion> getPostulaciones() {
         return postulaciones;

@@ -19,15 +19,13 @@ public class ProdNotifierFactory implements NotifierFactory {
 
     @Override
     public INotifier createEmailNotifier() {
-        // --- LÓGICA MODIFICADA ---
-        // Ahora usamos las clases reales
+
         return new EmailNotifier(new JavaMail());
     }
 
     @Override
     public INotifier createChatNotifier() {
-        // --- LÓGICA MODIFICADA ---
-        // Ahora usamos las clases reales
+
         return new DiscordNotifier(new DiscordService());
     }
 }

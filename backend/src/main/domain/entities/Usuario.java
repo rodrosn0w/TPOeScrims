@@ -10,7 +10,7 @@ public class Usuario {
     private String region;
     private List<String> rolesPreferidos = new ArrayList<>();
 
-    // getters/setters, ctor mínimos
+
     public Usuario(String username, String email) {
         this.username = username; this.email = email;
     }

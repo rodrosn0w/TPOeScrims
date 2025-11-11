@@ -17,7 +17,7 @@ public class StateConfirmado implements ScrimState { // Asegúrate que implement
 
     @Override
     public void iniciar(ScrimContext ctx) {
-        // --- LÓGICA AGREGADA ---
+
         // CU7: Iniciar scrim
         // Regla de negocio: Solo puede iniciar si la fecha/hora es la actual (simulado por el scheduler)
         if (ctx.getScrim().getFechaHora().isBefore(LocalDateTime.now().plusMinutes(1))) {
