@@ -1,104 +1,88 @@
-TPO Final - eScrims: Plataforma de eSports
-Este proyecto es el Trabajo Práctico Final para la materia Proceso de Desarrollo de Software.
+# 🕹️ TPO Final - eScrims: Plataforma de eSports
 
-Información del Grupo
+**Trabajo Práctico Final** — Materia: *Proceso de Desarrollo de Software*  
+**Universidad:** UADE - Facultad de Ingeniería y Ciencias Exactas  
 
-Universidad: UADE - Facultad de Ingeniería y Ciencias Exactas 
+---
 
+## 👥 Información del Grupo
 
-Materia: Proceso de Desarrollo de Software 
+**Docente:** Ruiz Matías  
+**Grupo 6:**
+- Acuña Laura (1177259)
+- Alves Juan (1142620)
+- Bossio Manuel (1191114)
+- Cuenca Marcos (1185654)
+- Molina Lautaro (1174643)
+- Nieva Rodrigo (1108233)
 
+---
 
-Docente: Ruiz Matias 
+## 🎯 1. Propósito del Proyecto
 
+El objetivo de este TPO es **diseñar y desarrollar (ADOO)** el backend de una plataforma para organizar *scrims* (partidas amistosas) de eSports.
 
-Grupo 6: 
+El sistema gestiona el **ciclo de vida completo de una partida**, desde su creación y emparejamiento hasta su finalización y notificación a los jugadores, aplicando los principios **SOLID** y los **patrones de diseño** vistos en la materia.
 
-Acuña Laura (1177259) 
+---
 
+## 🏗️ 2. Arquitectura
 
-Alves Juan (1142620) 
+El código fuente cumple con la **arquitectura de 4 capas** solicitada en la consigna:
 
+| Capa | Descripción | Ejemplo |
+|------|--------------|----------|
+| **Controller** | Simulado por `main.controller.ConsoleController`. Actúa como la *View* o *App móvil*, según lo validado con el docente. | `ConsoleController.java` |
+| **Service** | Contiene la lógica de negocio y coordinación. | `main.service.ScrimService` |
+| **Domain** | Núcleo del sistema: entidades (`Scrim`, `Usuario`) y patrones de dominio (*State*, *Strategy*, etc.). | `main.domain.*` |
+| **Infra** | Representa los servicios externos. Incluye notificaciones y adaptadores. | `main.infra.*` |
+| **Persistencia** | Simulada con `main.repo.InMemoryScrimRepo` (no requiere BBDD real). | `InMemoryScrimRepo.java` |
+| **Notificaciones** | Contiene los *Adapters* y *Factories* para los notificadores. | `main.infra.notificacion.*` |
 
-Bossio Manuel (1191114) 
+---
 
-Cuenca Marcos (1185654) 
+## 🧩 3. Patrones de Diseño Implementados
 
-Molina Lautaro (1174643) 
+El proyecto implementa **7 patrones de diseño** —los 4 obligatorios y 3 opcionales—.
 
-Nieva Rodrigo (1108233) 
+### 🧱 Patrones Obligatorios
 
+| Patrón | Descripción | Clases principales |
+|--------|--------------|--------------------|
+| **State** | Gestiona el ciclo de vida completo del `Scrim` (CUs 4–9). | `ScrimState`, `ScrimContext`, `StateBuscando`, `StateLobbyArmado`, `StateConfirmado`, `StateEnJuego`, `StateFinalizado`, `StateCancelado` |
+| **Strategy** | Define algoritmos intercambiables de emparejamiento (CU5). | `MatchmakingStrategy`, `ByMMRStrategy`, `ByLatencyStrategy`, `ByHistoryStrategy` |
+| **Observer** | Notifica cambios de estado (CU10) de forma desacoplada. | `DomainEventBus`, `Subscriber`, `ScrimStateChanged` |
+| **Abstract Factory** | Crea familias de notificadores (simulados vs. reales) sin acoplar el Controller. | `NotifierFactory`, `DevNotifierFactory`, `ProdNotifierFactory` |
 
-1. Propósito del Proyecto
-El objetivo de este TPO es diseñar y desarrollar (ADOO) el backend de una plataforma para organizar scrims (partidas amistosas) de eSports.
+### ⚙️ Patrones Opcionales
 
-El sistema gestiona el ciclo de vida completo de una partida, desde su creación y emparejamiento hasta su finalización y notificación a los jugadores, aplicando los principios SOLID y los patrones de diseño vistos en la materia.
+| Patrón | Descripción | Clases principales |
+|--------|--------------|--------------------|
+| **Builder** | Creación compleja de la entidad `Scrim` (CU3). | `ScrimBuilder` |
+| **Adapter** | Conecta la interfaz `INotifier` con servicios externos simulados (Push, Mail, Discord). | `EmailNotifier`, `PushNotifier`, `DiscordNotifier` |
+| **Command** | Encapsula acciones de gestión del Scrim (ej. `AsignarRol`, `SwapJugadores`). | `ScrimCommand`, `AsignarRolCommand`, `CommandInvoker` |
 
-2. Arquitectura
-El código fuente cumple con la arquitectura de 4 capas solicitada en la consigna:
+---
 
-Controller: Simulado por main.controller.ConsoleController. Actúa como la "View" o "App móvil", según lo validado con el docente.
+## 🧪 4. Cómo Correr la Simulación (Demo)
 
-Service: Contiene la lógica de negocio y coordinación, por ejemplo, main.service.ScrimService.
+El proyecto está configurado para **correr una simulación completa del flujo de patrones** desde la consola.
 
-Domain: El núcleo del sistema. Contiene las entidades (Scrim, Usuario) y las implementaciones de los patrones de dominio (State, Strategy, etc.).
+### 🔧 Requisitos
+- Java 17 (o superior)  
+- Maven (para compilar y ejecutar tests)
 
-Infra: Representa los servicios externos.
+### ▶️ Pasos para Ejecutar
 
-Persistencia: Simulada con main.repo.InMemoryScrimRepo (cumpliendo con la consigna de no requerir una BBDD real).
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/<tu-usuario>/TPO-eScrims.git
+cd TPO-eScrims
 
-Notificaciones: El paquete main.infra.notificacion contiene los Adapters y Factories.
+# 2. (Opcional) Ejecutar los tests unitarios
+mvn test
 
-3. Patrones de Diseño Implementados
-Este proyecto implementa 7 patrones de diseño (los 4 obligatorios y 3 opcionales):
+# 3. Compilar y ejecutar la simulación
+mvn compile
+mvn exec:java -Dexec.mainClass="main.App"´´´
 
-Patrones Obligatorios
-
-State: Utilizado para gestionar el ciclo de vida completo del Scrim (documentado en CUs 4 al 9 ).
-
-Clases: ScrimState, ScrimContext, StateBuscando, StateLobbyArmado, StateConfirmado, StateEnJuego, StateFinalizado, StateCancelado.
-
-
-Strategy: Utilizado para definir algoritmos intercambiables de emparejamiento (CU5) .
-
-Clases: MatchmakingStrategy, ByMMRStrategy, ByLatencyStrategy, ByHistoryStrategy.
-
-
-Observer: Utilizado para notificar cambios de estado (CU10)  de forma desacoplada.
-
-Clases: DomainEventBus (Subject), Subscriber (Observer), ScrimStateChanged (Event).
-
-Abstract Factory: Utilizado para crear familias de notificadores (simulados vs. reales) sin acoplar el Controller.
-
-Clases: NotifierFactory, DevNotifierFactory, ProdNotifierFactory.
-
-Patrones Opcionales
-
-Builder: Utilizado para la creación compleja de la entidad Scrim (CU3) .
-
-Clases: ScrimBuilder.
-
-Adapter: Utilizado para conectar nuestra interfaz INotifier con servicios externos simulados (PushService, JavaMail, DiscordService).
-
-Clases: EmailNotifier, PushNotifier, DiscordNotifier.
-
-Command: Utilizado para encapsular acciones de gestión del Scrim, como AsignarRol o SwapJugadores.
-
-Clases: ScrimCommand, AsignarRolCommand, CommandInvoker.
-
-4. Cómo Correr la Simulación (Demo)
-El proyecto está configurado para correr una simulación completa del flujo de patrones desde la consola.
-
-Requisitos
-Java 17 (o superior).
-
-Maven (para compilar y correr tests).
-
-Pasos para Ejecutar
-Clonar el repositorio.
-
-(Opcional) Correr los tests unitarios con mvn test.
-
-Ejecutar la clase principal main.App.java.
-
-Esto lanzará el ConsoleController y ejecutará el método demo(), mostrando en la terminal el flujo completo de creación de Scrim, postulación de jugadores y la coreografía de patrones (State, Observer, Factory, etc.) en acción.
