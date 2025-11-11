@@ -43,7 +43,7 @@ El código fuente cumple con la **arquitectura de 4 capas** solicitada en la con
 
 ##  3. Patrones de Diseño Implementados
 
-## 🧩 Patrones de Diseño Utilizados
+##  Patrones de Diseño Utilizados
 
 El proyecto implementa **7 patrones de diseño** aplicados en distintas capas para cumplir con los principios **SOLID** y promover un diseño desacoplado, extensible y mantenible.
 
