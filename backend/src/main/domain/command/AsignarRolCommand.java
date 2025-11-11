@@ -10,7 +10,7 @@ import main.domain.state.ScrimContext;
  */
 public class AsignarRolCommand implements ScrimCommand {
 
-    // El comando necesita saber el "receptor" de la acción.
+
     // private final Usuario usuario;
     // private final String nuevoRol;
     // private String rolAnterior; // Para el undo()

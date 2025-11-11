@@ -73,9 +73,9 @@ public class ConsoleController {
         }
 
         System.out.println("\n--- Postulando al 10mo jugador (dispara cambio de estado) ---");
-        // Al postular al 10mo, el StateBuscando debe transicionar a StateLobbyArmado
+        // Al postular al 10mo, el StateBuscando debe transforamarse a StateLobbyArmado
         ctx.postular(jugadores.get(9));
-        // (Esto debe disparar al Observer, Factory y Adapters por primera vez)
+
 
         // --- 3. CU6: Confirmar Participación (Patrón State) ---
         System.out.println("\n--- PASO 3: Confirmando participación (Patrón State) ---");
@@ -86,15 +86,15 @@ public class ConsoleController {
         }
 
         System.out.println("\n--- Confirmando al 10mo jugador (dispara cambio de estado) ---");
-        // Al confirmar al 10mo, el StateLobbyArmado debe transicionar a StateConfirmado
+        // Al confirmar al 10mo, el StateLobbyArmado debe transformarse a StateConfirmado
         ctx.confirmar(jugadores.get(9));
         // (Esto dispara al Observer, Factory y Adapters por segunda vez)
 
         // --- 4. CU7: Iniciar Scrim (Patrón State) ---
         System.out.println("\n--- PASO 4: Iniciando Scrim (Patrón State) ---");
 
-        // Simulación: El Scheduler corre y ve que es la hora.
-        // "Hackeamos" la hora del scrim para que coincida con la hora actual.
+
+        // "Seteamos" la hora del scrim para que coincida con la hora actual.
         System.out.println("... (Simulación: El Scheduler detecta que es la hora de la partida) ...");
         ctx.getScrim().setFechaHora(LocalDateTime.now().minusMinutes(1)); // Seteamos la hora a "ahora"
 
