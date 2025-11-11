@@ -2,7 +2,6 @@ package main;
 
 import main.controller.ConsoleController;
 import main.domain.events.DomainEventBus;
-// Importamos las factories
 import main.infra.notificacion.factory.DevNotifierFactory;
 import main.infra.notificacion.factory.NotifierFactory;
 import main.repo.InMemoryScrimRepo;
@@ -14,11 +13,11 @@ public class App {
         var repo = new InMemoryScrimRepo();
         var service = new ScrimService(repo, bus);
 
-
+        //Creamos abstract factory [de simulacion]
 
         NotifierFactory factory = new DevNotifierFactory();
 
-
+        //la 'inyectamos' al ConsoleController
         new ConsoleController(service, bus, factory).demo();
     }
 }

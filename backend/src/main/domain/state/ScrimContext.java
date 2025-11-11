@@ -58,7 +58,6 @@ public class ScrimContext {
     public String getNombreEstadoActual() {
         return this.state.nombre();
     }
-    // --- FIN LÓGICA AGREGADA ---
 
 
     public void postular(Usuario u){ state.postular(this, u); }

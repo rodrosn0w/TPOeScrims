@@ -9,27 +9,26 @@ import main.infra.notificacion.Notificador;
 import main.infra.notificacion.factory.NotifierFactory;
 import main.infra.notificacion.model.Notificacion;
 import main.service.ScrimService;
-// --- LÓGICA AGREGADA (Imports para la demo) ---
 import main.domain.command.AsignarRolCommand;
 import main.domain.command.CommandInvoker;
 import main.domain.state.ScrimContext;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-// --- FIN LÓGICA AGREGADA ---
+
 
 public class ConsoleController {
+    //se 'suscribe' al domaineventubs
     private final ScrimService service;
     private final DomainEventBus bus;
     private final NotifierFactory factory;
 
-    // El constructor queda igual que como lo dejamos en el Paso 1
     public ConsoleController(ScrimService service, DomainEventBus bus, NotifierFactory factory){
         this.service = service;
         this.bus = bus;
         this.factory = factory;
 
-        // El suscriptor (Observer) usa la Factory para crear los Notifiers (Adapter)
+        // Si recibe un evento, va a reaccionar usando factory, este es el metodo que vamos a correr
         INotifier pushNotifier = factory.createPushNotifier();
         INotifier emailNotifier = factory.createEmailNotifier();
         INotifier chatNotifier = factory.createChatNotifier();
@@ -46,10 +45,7 @@ public class ConsoleController {
         });
     }
 
-    /**
-     * Esta es la demo principal que simula el flujo completo
-     * para el video de 5 minutos.
-     */
+
     public void demo() {
         System.out.println("--- INICIO DE LA DEMO: eScrims ---");
 
@@ -106,16 +102,6 @@ public class ConsoleController {
         ctx.finalizar();
         // (Esto dispara al Observer, Factory y Adapters por cuarta vez)
 
-        // --- 6. Demostración Patrón Command (Opcional) ---
-        System.out.println("\n--- PASO 6: Demostración Patrón Command (Opcional) ---");
-        CommandInvoker invoker = new CommandInvoker(ctx);
-
-        // Creamos y ejecutamos un comando
-        ScrimCommand asignarRol = new AsignarRolCommand();
-        invoker.executeCommand(asignarRol);
-
-        // Deshacemos el comando
-        invoker.undoLastCommand();
 
         System.out.println("\n--- FIN DE LA DEMO ---");
     }
