@@ -72,15 +72,15 @@ Cada patrón fue seleccionado para **resolver un problema de diseño específico
 
 ---
 
-## 🧪 4. Cómo Correr la Simulación (Demo)
+##  4. Cómo Correr la Simulación (Demo)
 
 El proyecto está configurado para **correr una simulación completa del flujo de patrones** desde la consola.
 
-### 🔧 Requisitos
+###  Requisitos
 - Java 17 (o superior)  
 - Maven (para compilar y ejecutar tests)
 
-### ▶️ Pasos para Ejecutar
+###  Pasos para Ejecutar
 
 ```bash
 # 1. Clonar el repositorio
