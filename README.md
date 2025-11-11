@@ -1,11 +1,11 @@
-# 🕹️ TPO Final - eScrims: Plataforma de eSports
+#  TPO Final - eScrims: Plataforma de eSports
 
 **Trabajo Práctico Final** — Materia: *Proceso de Desarrollo de Software*  
 **Universidad:** UADE - Facultad de Ingeniería y Ciencias Exactas  
 
 ---
 
-## 👥 Información del Grupo
+##  Información del Grupo
 
 **Docente:** Ruiz Matías  
 **Grupo 6:**
@@ -18,7 +18,7 @@
 
 ---
 
-## 🎯 1. Propósito del Proyecto
+##  1. Propósito del Proyecto
 
 El objetivo de este TPO es **diseñar y desarrollar (ADOO)** el backend de una plataforma para organizar *scrims* (partidas amistosas) de eSports.
 
@@ -26,7 +26,7 @@ El sistema gestiona el **ciclo de vida completo de una partida**, desde su creac
 
 ---
 
-## 🏗️ 2. Arquitectura
+##  2. Arquitectura
 
 El código fuente cumple con la **arquitectura de 4 capas** solicitada en la consigna:
 
@@ -41,26 +41,34 @@ El código fuente cumple con la **arquitectura de 4 capas** solicitada en la con
 
 ---
 
-## 🧩 3. Patrones de Diseño Implementados
+##  3. Patrones de Diseño Implementados
 
-El proyecto implementa **7 patrones de diseño** —los 4 obligatorios y 3 opcionales—.
+## 🧩 Patrones de Diseño Utilizados
 
-### 🧱 Patrones Obligatorios
-
-| Patrón | Descripción | Clases principales |
-|--------|--------------|--------------------|
-| **State** | Gestiona el ciclo de vida completo del `Scrim` (CUs 4–9). | `ScrimState`, `ScrimContext`, `StateBuscando`, `StateLobbyArmado`, `StateConfirmado`, `StateEnJuego`, `StateFinalizado`, `StateCancelado` |
-| **Strategy** | Define algoritmos intercambiables de emparejamiento (CU5). | `MatchmakingStrategy`, `ByMMRStrategy`, `ByLatencyStrategy`, `ByHistoryStrategy` |
-| **Observer** | Notifica cambios de estado (CU10) de forma desacoplada. | `DomainEventBus`, `Subscriber`, `ScrimStateChanged` |
-| **Abstract Factory** | Crea familias de notificadores (simulados vs. reales) sin acoplar el Controller. | `NotifierFactory`, `DevNotifierFactory`, `ProdNotifierFactory` |
-
-### ⚙️ Patrones Opcionales
+El proyecto implementa **7 patrones de diseño** aplicados en distintas capas para cumplir con los principios **SOLID** y promover un diseño desacoplado, extensible y mantenible.
 
 | Patrón | Descripción | Clases principales |
 |--------|--------------|--------------------|
-| **Builder** | Creación compleja de la entidad `Scrim` (CU3). | `ScrimBuilder` |
+| **State** | Gestiona el ciclo de vida completo del `Scrim`. | `ScrimState`, `ScrimContext`, `StateBuscando`, `StateLobbyArmado`, `StateConfirmado`, `StateEnJuego`, `StateFinalizado`, `StateCancelado` |
+| **Strategy** | Define algoritmos intercambiables de emparejamiento entre jugadores. | `MatchmakingStrategy`, `ByMMRStrategy`, `ByLatencyStrategy`, `ByHistoryStrategy` |
+| **Observer** | Notifica cambios de estado de forma desacoplada. | `DomainEventBus`, `Subscriber`, `ScrimStateChanged` |
+| **Abstract Factory** | Crea familias de notificadores (simulados o reales) sin acoplar el Controller. | `NotifierFactory`, `DevNotifierFactory`, `ProdNotifierFactory` |
+| **Builder** | Facilita la creación compleja de la entidad `Scrim`. | `ScrimBuilder` |
 | **Adapter** | Conecta la interfaz `INotifier` con servicios externos simulados (Push, Mail, Discord). | `EmailNotifier`, `PushNotifier`, `DiscordNotifier` |
-| **Command** | Encapsula acciones de gestión del Scrim (ej. `AsignarRol`, `SwapJugadores`). | `ScrimCommand`, `AsignarRolCommand`, `CommandInvoker` |
+| **Command** | Encapsula acciones de gestión del `Scrim`, como asignar roles o intercambiar jugadores. | `ScrimCommand`, `AsignarRolCommand`, `CommandInvoker` |
+
+---
+
+Cada patrón fue seleccionado para **resolver un problema de diseño específico** dentro del dominio:
+
+- **State** → Controla la transición entre los diferentes estados del Scrim.  
+- **Strategy** → Permite elegir dinámicamente el algoritmo de emparejamiento.  
+- **Observer** → Informa a los suscriptores sobre cambios sin generar dependencias directas.  
+- **Abstract Factory** → Facilita la creación de notificadores adaptados a distintos entornos.  
+- **Builder** → Simplifica la construcción de objetos `Scrim` con múltiples parámetros.  
+- **Adapter** → Integra servicios externos de notificación sin alterar la interfaz del dominio.  
+- **Command** → Centraliza las acciones ejecutables sobre el Scrim, mejorando la extensibilidad.
+
 
 ---
 
